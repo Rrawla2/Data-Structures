@@ -92,11 +92,11 @@ class LinkedList:
         return ret_value
 
     def contains(self, value):
-        # loop through the linked list until the next pointer is None
-        cur_node = self.head
-        while cur_node is not None:
+        # loop through the linked list until we find the value OR the next pointer is None
+        current_node = self.head
+        while current_node is not None:
             # if we find 'value'
-            if cur_node.get_value() == value:
+            if current_node.get_value() == value:
                 return True
         return False
 
