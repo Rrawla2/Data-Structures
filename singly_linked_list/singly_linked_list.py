@@ -14,7 +14,8 @@ class Node:
 
 # Head, Tail and None are special nodes in the linked list
 # You will always need a head, you should also have a tail
-#
+
+
 class LinkedList:
     def __init__(self):
         # what attributes do we need?
