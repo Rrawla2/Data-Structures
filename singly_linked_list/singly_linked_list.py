@@ -110,7 +110,10 @@ class LinkedList:
         while current_node is not None:
             # if we find 'value'
             if current_node.get_value() == value:
+                print("The list contains the value")
                 return True
+            current_node = current_node.get_next_node()
+        print("The list does not contain the value")
         return False
 
     def get_max(self):
@@ -134,10 +137,12 @@ class LinkedList:
             current_node = current_node.get_next_node()
         return max_value
 
-# *** Tests for get_max ***
+# *** Tests for get_max and contains ***
 new_list = LinkedList()
 new_list.add_to_head(5)
 new_list.add_to_head(8)
 new_list.add_to_head(50)
 new_list.add_to_head(1)
+new_list.contains(8)
+new_list.contains(10)
 print("The max value is: ", new_list.get_max())
