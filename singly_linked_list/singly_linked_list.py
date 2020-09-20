@@ -3,6 +3,9 @@ class Node:
         self.value = value
         self.next_node = next_node
 
+    def __repr__(self):
+        return self.value
+
     def get_value(self):
         return self.value
 
@@ -21,6 +24,15 @@ class LinkedList:
         # what attributes do we need?
         self.head = None
         self.tail = None
+
+    def output_list(self):
+        current_node = self.head
+        if current_node is None:
+            print("List is empty")
+        while current_node is not None:
+            print(current_node.get_value())
+            current_node = current_node.get_next_node()
+        return
 
     def add_to_head(self, value): # order is important here.  Don't update until last.
         new_node = Node(value)
@@ -102,5 +114,30 @@ class LinkedList:
         return False
 
     def get_max(self):
-        # TODO time permitting
-        pass
+        # Returns the max value in the linked list
+        # set current_node to the head
+        # initialize variable to head value for comparison
+        current_node = self.head
+        max_value = self.head.get_value()
+
+        # check for empty list
+        if current_node is None:
+            return None
+        # traverse the list while the list is not empty
+        # if the current node value is greater than the current max value
+        # set the current node value as the new max value
+        # go to the next node value and compare to the current max value
+        # when all node values have been checked - return the max value
+        while current_node is not None:
+            if current_node.get_value() > max_value:
+                max_value = current_node.get_value()
+            current_node = current_node.get_next_node()
+        return max_value
+
+# *** Tests for get_max ***
+new_list = LinkedList()
+new_list.add_to_head(5)
+new_list.add_to_head(8)
+new_list.add_to_head(50)
+new_list.add_to_head(1)
+print("The max value is: ", new_list.get_max())
