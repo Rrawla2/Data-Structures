@@ -117,15 +117,16 @@ class LinkedList:
         return False
 
     def get_max(self):
+        # check for empty list
+        if self.head is None:
+            return None
+
         # Returns the max value in the linked list
         # set current_node to the head
         # initialize variable to head value for comparison
         current_node = self.head
         max_value = self.head.get_value()
 
-        # check for empty list
-        if current_node is None:
-            return None
         # traverse the list while the list is not empty
         # if the current node value is greater than the current max value
         # set the current node value as the new max value

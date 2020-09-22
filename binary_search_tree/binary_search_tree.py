@@ -17,19 +17,53 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
+        # RECURSIVE
+        # if value < root
+            # if left child is None
+                # add here - create new_BSTnode
+        # else
+        # self.left.insert(value) # recursive call
+
+        # if value >= root - duplicate values go right
+            # if right child is None
+                # add here
+            # else
+                # self.right.insert(value) # recursive call
+    # ************************************************************
+        # ITERATIVE
+        # while not at bottom level of tree
+
+        # is it less than or equal to the root - duplicate values go right
+            # if left child is None
+                # add here
+                # exit loop
+        # is it greater than or equal to the root - duplicate values go right
+            # if right child is None
+                # add node here
+                # exit loop
+
         pass
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
+        # check if self.value is target
+            # if yes, return True
+            # if no,
+                # go left?
+                # go right?
         pass
 
     # Return the maximum value found in the tree
     def get_max(self):
+        # Go right until you can't go right anymore - you get back the biggest value
+        # while loop - while current_value is > next value
         pass
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
+        # RECURSIVE
+        # check one side and then check the other
         pass
 
     # Part 2 -----------------------
