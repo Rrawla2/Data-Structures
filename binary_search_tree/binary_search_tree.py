@@ -18,17 +18,17 @@ class BSTNode:
     # Insert the given value into the tree
     def insert(self, value):
         # RECURSIVE
-        # if value < root
-            # if left child is None
-                # add here - create new_BSTnode
-        # else
-        # self.left.insert(value) # recursive call
+        if value < self.value:  # if value is less than self.value
+            if self.left is None:  # if left child is None
+                self.left.insert(BSTNode(value))  # insert here - create new_BSTnode
+            else:
+                self.left.insert(value)  # recursive call
 
-        # if value >= root - duplicate values go right
-            # if right child is None
-                # add here
-            # else
-                # self.right.insert(value) # recursive call
+        if value >= self.value:  # - duplicate values go right
+            if self.right is None: # if right child is None
+                self.right.insert(BSTNode(value))  # insert here
+            else:
+                self.right.insert(value)  # self.right.insert(value) # recursive call
     # ************************************************************
         # ITERATIVE
         # while not at bottom level of tree
@@ -42,7 +42,6 @@ class BSTNode:
                 # add node here
                 # exit loop
 
-        pass
 
     # Return True if the tree contains the value
     # False if it does not
