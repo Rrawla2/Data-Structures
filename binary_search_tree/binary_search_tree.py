@@ -9,6 +9,8 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -20,15 +22,15 @@ class BSTNode:
         # RECURSIVE
         if value < self.value:  # if value is less than self.value
             if self.left is None:  # if left child is None
-                self.left = BSTNode(value)  # insert here - create new_BSTnode
+                self.left = BSTNode(value)  # insert here - create new BSTnode
             else:
                 self.left.insert(value)  # recursive call
 
-        if value >= self.value:  # - duplicate values go right
-            if self.right is None: # if right child is None
-                self.right = BSTNode(value) # insert here
+        elif value >= self.value:  # - duplicate values go right
+            if self.right is None:  # if right child is None
+                self.right = BSTNode(value)  # insert here
             else:
-                self.right.insert(value)  # self.right.insert(value) # recursive call
+                self.right.insert(value)  # recursive call
     # ************************************************************
         # ITERATIVE
         # while not at bottom level of tree
@@ -42,17 +44,23 @@ class BSTNode:
                 # add node here
                 # exit loop
 
-
     # Return True if the tree contains the value
     # False if it does not
-    def contains(self, target):
-        # check if self.value is target
-            # if yes, return True
-            # if no,
-                # go left?
-                # go right?
-        pass
 
+    def contains(self, target):
+        if self.value == target:  # check if self.value is target
+            return True  # if yes, return True
+        else:  # if no,
+            if target < self.value:  # go left?
+                if target is not self.left:
+                    return False
+                else:
+                    return self.left.contains(target)
+            elif target >= self.value:  # go right?
+                if target is not self.right:
+                    return False
+                else:
+                    return self.right.contains(target)
     # Return the maximum value found in the tree
     def get_max(self):
         # Go right until you can't go right anymore - you get back the biggest value
@@ -114,6 +122,6 @@ print("elegant methods")
 print("pre order")
 bst.pre_order_dft()
 print("in order")
-# bst.in_order_dft()
+bst.in_order_print()
 print("post order")
 bst.post_order_dft()  
