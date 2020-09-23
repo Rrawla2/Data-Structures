@@ -20,13 +20,13 @@ class BSTNode:
         # RECURSIVE
         if value < self.value:  # if value is less than self.value
             if self.left is None:  # if left child is None
-                self.left.insert(BSTNode(value))  # insert here - create new_BSTnode
+                self.left = BSTNode(value)  # insert here - create new_BSTnode
             else:
                 self.left.insert(value)  # recursive call
 
         if value >= self.value:  # - duplicate values go right
             if self.right is None: # if right child is None
-                self.right.insert(BSTNode(value))  # insert here
+                self.right = BSTNode(value) # insert here
             else:
                 self.right.insert(value)  # self.right.insert(value) # recursive call
     # ************************************************************
@@ -114,6 +114,6 @@ print("elegant methods")
 print("pre order")
 bst.pre_order_dft()
 print("in order")
-bst.in_order_dft()
+# bst.in_order_dft()
 print("post order")
 bst.post_order_dft()  
