@@ -1,3 +1,9 @@
+import sys
+sys.path.append('../queue2')
+sys.path.append('../stack')
+from queue2 import Queue
+from stack import Stack
+
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -19,6 +25,8 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
+        if self.value is None:
+            return None
         # RECURSIVE
         if value < self.value:  # if value is less than self.value
             if self.left is None:  # if left child is None
@@ -48,47 +56,86 @@ class BSTNode:
     # False if it does not
 
     def contains(self, target):
+        if self.value is None:
+            return None
         if self.value == target:  # check if self.value is target
             return True  # if yes, return True
-        else:  # if no,
-            if target < self.value:  # go left?
-                if target is not self.left:
-                    return False
-                else:
-                    return self.left.contains(target)
-            elif target >= self.value:  # go right?
-                if target is not self.right:
-                    return False
-                else:
-                    return self.right.contains(target)
+        # if no,
+        elif target < self.value:  # go left
+            if self.left:
+                return self.left.contains(target)
+            else:
+                return False
+        elif target >= self.value:  # go right
+            if self.right:
+                return self.right.contains(target)
+            else:
+                return False
+
     # Return the maximum value found in the tree
     def get_max(self):
+        if self.value is None:
+            return None
         # Go right until you can't go right anymore - you get back the biggest value
-        # while loop - while current_value is > next value
-        pass
+        # while loop - while self.value is not next right node
+        while not self.right:
+            return self.value
+        return self.right.get_max()
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
         # RECURSIVE
         # check one side and then check the other
-        pass
+        fn(self.value)  # call function fn on each node
+        if self.right:  # go right
+            self.right.for_each(fn)  # call function when it's the right side
+        if self.left:  # go left
+            self.left.for_each(fn)  # call function when it's the left side
 
     # Part 2 -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self):
-        pass
+        if self.left:
+            self.left.in_order_print()
+        print(self.value)
+        if self.right:
+            self.right.in_order_print()
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
     def bft_print(self):
-        pass
+        my_queue = Queue()  # Create a new Queue
+        my_queue.enqueue(self)  # add passed node to the new Queue
+
+        while len(my_queue) > 0:  # check if the queue is not empty
+            current_node = my_queue.dequeue()  # set node_value to next item in the list
+            print(current_node.value)  # print the node_value
+
+            if current_node.left:
+                my_queue.enqueue(current_node.left)
+            if current_node.right:
+                my_queue.enqueue(current_node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
     def dft_print(self):
-        pass
+        my_stack = Stack()  # create a stack to keep track of nodes we are processing
+        my_stack.push(self)  # push `self` into the stack
+        # while something still in the stack(not done processing all nodes)
+        while len(my_stack) > 0:
+            # push when we START, pop when a node is DONE
+            current_node = my_stack.pop()
+            print(current_node.value)  # call `print()`
+
+            if current_node.left:
+                my_stack.push(current_node.left)
+            if current_node.right:
+                my_stack.push(current_node.right)
+            # use existing `for_each()` as a reference for the traversal logic
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -105,6 +152,7 @@ class BSTNode:
 """
 This code is necessary for testing the `print` methods
 """
+
 bst = BSTNode(1)
 
 bst.insert(8)
@@ -119,9 +167,9 @@ bst.bft_print()
 bst.dft_print()
 
 print("elegant methods")
-print("pre order")
-bst.pre_order_dft()
+# print("pre order")
+# bst.pre_order_dft()
 print("in order")
 bst.in_order_print()
-print("post order")
-bst.post_order_dft()  
+# print("post order")
+# bst.post_order_dft()
